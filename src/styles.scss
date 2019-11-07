@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+/* Import material theme css */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+// color configs
+$carnegie-dark-blue: #163671;
+$carnegie-light-blue: #5eb6cd;
+$carnegie-brown: #c49a6c;
+$carnegie-green: #96ca4f;
+$red: #e45832;
+$background-grey: #f9f9f9;
+
+html, body {
+  background-color: $background-grey;
+  height: 100%;
+  .container {
+    position: relative;
+  }
+  h1 {
+    text-align: center;
+    color: $carnegie-dark-blue;
+  }
+  h2 {
+    color: $carnegie-dark-blue;
+  }
+  .form-wrapper {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    min-height: 400px;
+    .reset {
+      margin-top: 10px;
+    }
+  }
+  img.logo {
+    max-width: 45px;
+    position: absolute;
+    left: 15px;
+    z-index: 1;
+    top: 5px;
+  }
+}

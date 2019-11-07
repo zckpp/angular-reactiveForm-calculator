@@ -1,6 +1,8 @@
 # Calculator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.0.
+This project is to calculate Employees' annual contribution to their FSA account based on their amount per paycheck and pay period left.
+
+I am using reactive form and subscribing to date and amount per paycheck fields then using the value combined to calculate the result.
 
 ## Development server
 
