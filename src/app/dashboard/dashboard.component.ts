@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     this.calculatorForm = this.fb.group({
       date: [new Date()],
       amountPerPay: [''],
-      amountAnnual: [''],
+      amountAnnual: [0],
     });
     this.calculateAnnualAmount();
   }

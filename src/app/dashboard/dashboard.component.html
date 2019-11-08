@@ -6,8 +6,7 @@
     <form [formGroup]="calculatorForm">
       <br>
       <div class="row">
-        <div class="col-md-4 col-sm-6">
-          <h2>Input</h2>
+        <div class="col-md-1 col-sm-1">
         </div>
         <div class="col-md-4 col-sm-6">
           <mat-form-field>
@@ -16,6 +15,8 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
+        </div>
+        <div class="col-md-1 col-sm-1">
         </div>
         <div class="col-md-4 col-sm-6">
           <mat-form-field>
@@ -28,14 +29,15 @@
       <mat-divider></mat-divider>
       <br><br>
       <div class="row">
-        <div class="col-md-4 col-sm-6">
-          <h2>Result</h2>
+        <div class="col-md-1 col-sm-1">
         </div>
         <div class="col-md-4 col-sm-6">
-          <mat-form-field>
+          <mat-form-field class="annualAmount">
             <input matInput placeholder="Annual Amount" formControlName="amountAnnual" readonly="readonly"
                    [value]="calculatorForm.get('amountAnnual').value | currency">
           </mat-form-field>
+        </div>
+        <div class="col-md-1 col-sm-1">
         </div>
         <div class="col-md-4 col-sm-6">
           <button mat-raised-button (click)="this.reset()" class="reset">Reset</button>
