@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormBuilder, FormArray, FormGroup} from '@angular/forms';
-import {map, startWith, debounceTime, tap, distinctUntilChanged, filter, switchMap, mergeMap} from 'rxjs/operators';
-import {commitDate} from '../commit-date';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {ApiService} from '../api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,15 +11,23 @@ import {commitDate} from '../commit-date';
 export class DashboardComponent implements OnInit {
 
   calculatorForm: FormGroup;
-  minDate = new Date(commitDate.minDate);
-  maxDate = new Date(commitDate.maxDate);
+  minDate: Date;
+  maxDate: Date;
+  commitDate: object;
 
   constructor(
     private fb: FormBuilder,
+    private apiService: ApiService,
   ) {
   }
 
   ngOnInit() {
+    this.apiService.readDate().subscribe(commitDate => {
+        this.commitDate = commitDate;
+        this.minDate = new Date(commitDate.minDate);
+        this.maxDate = new Date(commitDate.maxDate);
+      }
+    );
     this.calculatorForm = this.fb.group({
       date: [new Date()],
       amountPerPay: [''],
@@ -39,11 +47,13 @@ export class DashboardComponent implements OnInit {
     const amountPerPay = this.calculatorForm.get('amountPerPay').value;
     let count = 0;
     if (date !== null && amountPerPay > 0) {
-      commitDate.date.forEach(dateString => {
+      const year = date.getFullYear();
+      const tempDate = 'date_' + year.toString();
+      this.commitDate[tempDate].forEach(dateString => {
         const dateObj = new Date(dateString);
-        if (dateObj < date) {
+        if (dateObj <= date) {
           count++;
-        } else if (dateObj > date) {
+        } else {
           return;
         }
       });
@@ -53,7 +63,6 @@ export class DashboardComponent implements OnInit {
   }
 
   reset() {
-    this.calculatorForm.get('amountPerPay').setValue(0, {emitEvent: false});
-    this.calculatorForm.get('amountAnnual').setValue(0, {emitEvent: false});
+    location.reload();
   }
 }

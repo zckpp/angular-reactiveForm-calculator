@@ -10,6 +10,7 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <mat-form-field>
+            <mat-hint><small>Please click the calendar icon to select a date.</small></mat-hint>
             <input matInput [min]="this.minDate" [max]="this.maxDate" [matDatepicker]="picker"
                    placeholder="FSA Start Date" formControlName="date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
