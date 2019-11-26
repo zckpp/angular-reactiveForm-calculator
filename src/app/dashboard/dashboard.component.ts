@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {ApiService} from '../api.service';
 
@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
   commitDate: object;
+  maxAnnualAmount: number;
+  amountError: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -26,6 +28,7 @@ export class DashboardComponent implements OnInit {
         this.commitDate = commitDate;
         this.minDate = new Date(commitDate.minDate);
         this.maxDate = new Date(commitDate.maxDate);
+        this.maxAnnualAmount = commitDate.maxAnnualAmount;
       }
     );
     this.calculatorForm = this.fb.group({
@@ -58,7 +61,13 @@ export class DashboardComponent implements OnInit {
         }
       });
       count = 24 - count;
-      this.calculatorForm.get('amountAnnual').setValue(amountPerPay * count, {emitEvent: false});
+      const result = amountPerPay * count;
+      if (result > this.maxAnnualAmount) {
+        this.amountError = true;
+        this.calculatorForm.get('amountAnnual').setValue(this.maxAnnualAmount, {emitEvent: false});
+      } else {
+        this.calculatorForm.get('amountAnnual').setValue(result, {emitEvent: false});
+      }
     }
   }
 

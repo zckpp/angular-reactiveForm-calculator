@@ -4,7 +4,7 @@ This project is to calculate Employees' annual contribution to their FSA account
 
 I am using reactive form and subscribing to date and amount per paycheck fields then using the value combined to calculate the result.
 
-To update the calculator with latest commit date, simplely update the commitDate.json file in assets folder, and remember to update min/max date for calendar picker as well, no need to re-compile the Angular app.
+To update the calculator with latest commit date or maximum annual amount, simplely update the commitDate.json file in assets folder, and remember to update min/max date for calendar picker as well, no need to re-compile the Angular app.
 
 ## Development server
 

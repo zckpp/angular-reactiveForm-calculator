@@ -22,7 +22,7 @@
         <div class="col-md-4 col-sm-6">
           <mat-form-field>
             <span matPrefix>$ &nbsp;</span>
-            <input matInput placeholder="Amount Per Paycheck" formControlName="amountPerPay">
+            <input matInput placeholder="Amount Per Paycheck" formControlName="amountPerPay" type="number" max="500">
           </mat-form-field>
         </div>
       </div>
@@ -42,6 +42,15 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <button mat-raised-button (click)="this.reset()" class="reset">Reset</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1 col-sm-1">
+        </div>
+        <div class="col-md-11">
+          <small class="notification" *ngIf="this.amountError === true">
+            The maximum annual amount is {{ this.maxAnnualAmount | currency }}, your result exceeded the maximum!
+          </small>
         </div>
       </div>
     </form>
