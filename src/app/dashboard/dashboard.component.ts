@@ -15,6 +15,11 @@ export class DashboardComponent implements OnInit {
   maxDate: Date;
   commitDate: object;
   maxAnnualAmount: number;
+  maxAmounts: [];
+  maxAnnualAmountHealthCare: number;
+  maxAnnualAmountLimitedPurpose: number;
+  maxAnnualAmountDependentSeparate: number;
+  maxAnnualAmountDependentJoint: number;
   amountError: boolean;
 
   constructor(
@@ -28,12 +33,13 @@ export class DashboardComponent implements OnInit {
         this.commitDate = commitDate;
         this.minDate = new Date(commitDate.minDate);
         this.maxDate = new Date(commitDate.maxDate);
-        this.maxAnnualAmount = commitDate.maxAnnualAmount;
+        this.maxAmounts = commitDate.maxAmounts;
       }
     );
     this.calculatorForm = this.fb.group({
       date: [new Date()],
       amountPerPay: [''],
+      type: [''],
       amountAnnual: [0],
     });
     this.calculateAnnualAmount();
@@ -43,11 +49,13 @@ export class DashboardComponent implements OnInit {
     this.calculatorForm.get('date').valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(val => this.calculateValue());
     // tslint:disable-next-line:max-line-length
     this.calculatorForm.get('amountPerPay').valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(val => this.calculateValue());
+    this.calculatorForm.get('type').valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe(val => this.calculateValue());
   }
 
   calculateValue() {
     const date = this.calculatorForm.get('date').value;
     const amountPerPay = this.calculatorForm.get('amountPerPay').value;
+    const type = this.calculatorForm.get('type').value;
     let count = 0;
     if (date !== null && amountPerPay > 0) {
       const year = date.getFullYear();
@@ -62,11 +70,15 @@ export class DashboardComponent implements OnInit {
       });
       count = 24 - count;
       const result = amountPerPay * count;
-      if (result > this.maxAnnualAmount) {
-        this.amountError = true;
-        this.calculatorForm.get('amountAnnual').setValue(this.maxAnnualAmount, {emitEvent: false});
-      } else {
-        this.calculatorForm.get('amountAnnual').setValue(result, {emitEvent: false});
+      if (type) {
+        this.maxAnnualAmount = type;
+        if (result > this.maxAnnualAmount) {
+          this.amountError = true;
+          this.calculatorForm.get('amountAnnual').setValue(this.maxAnnualAmount, {emitEvent: false});
+        } else {
+          this.amountError = false;
+          this.calculatorForm.get('amountAnnual').setValue(result, {emitEvent: false});
+        }
       }
     }
   }

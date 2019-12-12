@@ -19,10 +19,25 @@
         </div>
         <div class="col-md-1 col-sm-1">
         </div>
+        <div class="col-md-6 col-sm-12">
+          <mat-form-field>
+            <mat-label>Type of the FSA</mat-label>
+            <mat-select formControlName="type">
+              <mat-option [value]="maxAmount.amount" *ngFor="let maxAmount of maxAmounts">
+                {{ maxAmount.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-1 col-sm-1">
+        </div>
         <div class="col-md-4 col-sm-6">
           <mat-form-field>
             <span matPrefix>$ &nbsp;</span>
-            <input matInput placeholder="Amount Per Paycheck" formControlName="amountPerPay" type="number" max="500">
+            <input matInput placeholder="Amount Per Paycheck" formControlName="amountPerPay" type="number">
           </mat-form-field>
         </div>
       </div>
