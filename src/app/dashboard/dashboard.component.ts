@@ -16,10 +16,6 @@ export class DashboardComponent implements OnInit {
   commitDate: object;
   maxAnnualAmount: number;
   maxAmounts: [];
-  maxAnnualAmountHealthCare: number;
-  maxAnnualAmountLimitedPurpose: number;
-  maxAnnualAmountDependentSeparate: number;
-  maxAnnualAmountDependentJoint: number;
   amountError: boolean;
 
   constructor(
@@ -60,6 +56,7 @@ export class DashboardComponent implements OnInit {
     if (date !== null && amountPerPay > 0) {
       const year = date.getFullYear();
       const tempDate = 'date_' + year.toString();
+      // Use [tempDate] here because tempDate is number
       this.commitDate[tempDate].forEach(dateString => {
         const dateObj = new Date(dateString);
         if (dateObj <= date) {

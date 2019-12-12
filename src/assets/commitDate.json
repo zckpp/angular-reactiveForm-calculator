@@ -58,9 +58,5 @@
     {"name": "Limited Purpose FSA", "amount": "2750"},
     {"name": "Dependent Care FSA (Married person filing separately)", "amount": "2500"},
     {"name": "Dependent Care FSA (Individuals or married filing jointly)", "amount": "5000"}
-  ],
-  "maxAnnualAmountHealthCare": "2750",
-  "maxAnnualAmountLimitedPurpose": "2750",
-  "maxAnnualAmountDependentSeparate": "2500",
-  "maxAnnualAmountDependentJoint": "5000"
+  ]
 }
